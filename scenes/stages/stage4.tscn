@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj0u1chvcfsry"]
+
+[ext_resource type="Script" path="res://scripts/stage.gd" id="1_gpx3c"]
+[ext_resource type="Texture2D" uid="uid://bi4yw4uyyw8w7" path="res://assets/scenes/4/bg.png" id="2_0xk8h"]
+[ext_resource type="Texture2D" uid="uid://dhickaes74h33" path="res://assets/icons/arrow_back.png" id="3_nnb5c"]
+[ext_resource type="Script" path="res://scripts/door.gd" id="4_frhqk"]
+
+[node name="Stage" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_gpx3c")
+lines = Array[String](["The gate is locked and won't budge.", "Upon closer inspection, the gate seems to have a keyhole."])
+sequence_db = Array[int]([1])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -512.0
+offset_right = 512.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(2048, 2048)
+texture = ExtResource("2_0xk8h")
+stretch_mode = 3
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -144.0
+offset_right = 256.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Interactables" type="MarginContainer" parent="TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PointingHandDummyButton" type="TextureButton" parent="TextureRect/Interactables"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Control" type="Control" parent="TextureRect/Interactables"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DoorToTemple1Back" type="TextureButton" parent="TextureRect/Interactables/Control"]
+layout_mode = 2
+offset_left = 492.0
+offset_top = 613.0
+offset_right = 533.0
+offset_bottom = 658.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_nnb5c")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_frhqk")
+destination_stage_id = 2
+
+[node name="DoorToRightCorridor" type="TextureButton" parent="TextureRect/Interactables/Control"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 414.0
+offset_right = 586.0
+offset_bottom = 605.0
+mouse_default_cursor_shape = 2
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_frhqk")
+destination_stage_id = 5

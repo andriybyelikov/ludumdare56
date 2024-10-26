@@ -1,0 +1,85 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bdw2x53lfedy4"]
+
+[ext_resource type="FontFile" uid="uid://crgw4qevfhn11" path="res://assets/fonts/UglyQua.ttf" id="1_0r7g3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvga8"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cb638"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olfx0"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvwhi"]
+content_margin_left = 10.0
+content_margin_top = 28.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.25, 0.25, 0.25, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 8.0
+expand_margin_top = 32.0
+expand_margin_right = 8.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="FontVariation" id="FontVariation_xwwkb"]
+base_font = ExtResource("1_0r7g3")
+variation_transform = Transform2D(1.125, 0, 0, 1, 0, 0)
+spacing_glyph = 2
+
+[resource]
+default_font = SubResource("FontVariation_xwwkb")
+default_font_size = 16
+AutosaveIndicatorPanel/base_type = &"Panel"
+AutosaveIndicatorPanel/styles/panel = SubResource("StyleBoxFlat_vvga8")
+DialogText/base_type = &"Label"
+DialogText/font_sizes/font_size = 24
+Margin16/base_type = &"MarginContainer"
+Margin16/constants/margin_bottom = 16
+Margin16/constants/margin_left = 16
+Margin16/constants/margin_right = 16
+Margin16/constants/margin_top = 16
+Margin8/base_type = &"MarginContainer"
+Margin8/constants/margin_bottom = 8
+Margin8/constants/margin_left = 8
+Margin8/constants/margin_right = 8
+Margin8/constants/margin_top = 8
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_cb638")
+RedProgressBar/base_type = &"ProgressBar"
+RedProgressBar/styles/fill = SubResource("StyleBoxFlat_olfx0")
+StatusContainer/base_type = &"HBoxContainer"
+StatusContainer/constants/separation = 32
+TextMiddle/base_type = &"Label"
+TextMiddle/font_sizes/font_size = 32
+TextSmall/base_type = &"Label"
+TextSmall/font_sizes/font_size = 12
+Title/base_type = &"Label"
+Title/font_sizes/font_size = 80
+Window/constants/close_v_offset = 24
+Window/constants/title_height = 36
+Window/styles/embedded_border = SubResource("StyleBoxFlat_tvwhi")

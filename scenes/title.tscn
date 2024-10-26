@@ -1,0 +1,152 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvhf2dg6jpua4"]
+
+[ext_resource type="Script" path="res://scenes/title.tscn.gd" id="2_g3oqx"]
+[ext_resource type="PackedScene" uid="uid://bx2a28ndn4llt" path="res://scenes/save.tscn" id="3_3q4n8"]
+[ext_resource type="PackedScene" uid="uid://bjwfnq8kp5aqg" path="res://scenes/options.tscn" id="3_q7ycx"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Title"
+script = ExtResource("2_g3oqx")
+
+[node name="OptionsDialog" parent="." instance=ExtResource("3_q7ycx")]
+visible = false
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12549, 0.12549, 0.12549, 1)
+
+[node name="ContentLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainContentContainer" type="Control" parent="ContentLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainContentLayout" type="VBoxContainer" parent="ContentLayout/MainContentContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleContainer" type="Control" parent="ContentLayout/MainContentContainer/MainContentLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TitleLayout" type="VBoxContainer" parent="ContentLayout/MainContentContainer/MainContentLayout/TitleContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.5
+offset_top = -57.0
+offset_right = 183.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="ContentLayout/MainContentContainer/MainContentLayout/TitleContainer/TitleLayout"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"Title"
+text = "Mediator"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Subtitle" type="Label" parent="ContentLayout/MainContentContainer/MainContentLayout/TitleContainer/TitleLayout"]
+layout_mode = 2
+text = "Ludum Dare 56"
+horizontal_alignment = 2
+
+[node name="MainMenuContainer" type="Control" parent="ContentLayout/MainContentContainer/MainContentLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainMenuLayout" type="VBoxContainer" parent="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -68.0
+offset_right = 49.5
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="NewGameButton" type="Button" parent="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="ContinueButton" type="Button" parent="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Continue"
+
+[node name="OptionsButton" type="Button" parent="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout"]
+layout_mode = 2
+text = "Quit"
+
+[node name="CopyrightContainer" type="MarginContainer" parent="ContentLayout"]
+layout_mode = 2
+theme_type_variation = &"Margin16"
+
+[node name="Copyright" type="Label" parent="ContentLayout/CopyrightContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "© 2024 Andriy Byelikov Shvidak"
+horizontal_alignment = 1
+
+[node name="NewGameConfirmationDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Warning"
+initial_position = 1
+size = Vector2i(521, 106)
+
+[node name="Label" type="Label" parent="NewGameConfirmationDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 513.0
+offset_bottom = 57.0
+text = "Starting a new game will delete the currently saved game.
+Are you sure you want to proceed?"
+horizontal_alignment = 1
+
+[node name="Save" parent="." instance=ExtResource("3_3q4n8")]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="ContentLayout/MainContentContainer/MainContentLayout/MainMenuContainer/MainMenuLayout/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="confirmed" from="NewGameConfirmationDialog" to="." method="_on_new_game_confirmation_dialog_confirmed"]
+[connection signal="visibility_changed" from="NewGameConfirmationDialog" to="." method="_on_new_game_confirmation_dialog_visibility_changed"]

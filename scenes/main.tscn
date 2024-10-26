@@ -1,0 +1,427 @@
+[gd_scene load_steps=18 format=3 uid="uid://cxjv2o0nowbte"]
+
+[ext_resource type="Script" path="res://scenes/main.tscn.gd" id="1_4t1iu"]
+[ext_resource type="PackedScene" uid="uid://bjwfnq8kp5aqg" path="res://scenes/options.tscn" id="2_ot18p"]
+[ext_resource type="Script" path="res://scripts/dialog_text.gd" id="3_u1jja"]
+[ext_resource type="PackedScene" uid="uid://bx2a28ndn4llt" path="res://scenes/save.tscn" id="3_yfi0l"]
+[ext_resource type="Texture2D" uid="uid://bywkgau128qyh" path="res://assets/mugshots/archaeologist.png" id="4_y7sl2"]
+[ext_resource type="Texture2D" uid="uid://ca5abtf6pvff0" path="res://assets/maps/b1f.png" id="5_hguqx"]
+[ext_resource type="AudioStream" uid="uid://oyln6pjm5h2y" path="res://assets/music/ambient1.mp3" id="6_sp76a"]
+
+[sub_resource type="Animation" id="Animation_4odfq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ysxgj"]
+resource_name = "show_autosave_indicator"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8omt"]
+_data = {
+"RESET": SubResource("Animation_4odfq"),
+"show_autosave_indicator": SubResource("Animation_ysxgj")
+}
+
+[sub_resource type="Animation" id="Animation_l3qey"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ronku"]
+resource_name = "skip_dialog_indicator_blink"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rsgm5"]
+_data = {
+"RESET": SubResource("Animation_l3qey"),
+"skip_dialog_indicator_blink": SubResource("Animation_ronku")
+}
+
+[sub_resource type="Animation" id="Animation_rwwqp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_can1m"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_83dcx"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_frng2"]
+_data = {
+"RESET": SubResource("Animation_rwwqp"),
+"fade_in": SubResource("Animation_can1m"),
+"fade_out": SubResource("Animation_83dcx")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4t1iu")
+
+[node name="Save" parent="." instance=ExtResource("3_yfi0l")]
+unique_name_in_owner = true
+
+[node name="OptionsDialog" parent="." instance=ExtResource("2_ot18p")]
+visible = false
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="Interface/Background"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StageSlot" type="Control" parent="Interface/Background/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Mugshot" type="TextureRect" parent="Interface/Background/Control/StageSlot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -256.0
+offset_right = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 10
+texture = ExtResource("4_y7sl2")
+
+[node name="InterfaceBackground" type="MarginContainer" parent="Interface/Background"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DialogTextMarginContainer" type="MarginContainer" parent="Interface/Background/InterfaceBackground"]
+layout_mode = 2
+theme_type_variation = &"Margin16"
+
+[node name="DialogTextHeightLabel" type="Label" parent="Interface/Background/InterfaceBackground/DialogTextMarginContainer"]
+layout_mode = 2
+theme_type_variation = &"DialogText"
+text = " 
+ 
+ 
+"
+
+[node name="ColorRect" type="ColorRect" parent="Interface/Background/InterfaceBackground"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="InterfaceContentAspectRatioContainer" type="AspectRatioContainer" parent="Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+ratio = 1.3333
+
+[node name="AutosaveIndicator" type="MarginContainer" parent="Interface/InterfaceContentAspectRatioContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Panel" type="Panel" parent="Interface/InterfaceContentAspectRatioContainer/AutosaveIndicator"]
+layout_mode = 2
+theme_type_variation = &"AutosaveIndicatorPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface/InterfaceContentAspectRatioContainer/AutosaveIndicator"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_type_variation = &"Margin8"
+
+[node name="AutoSaveIndicatorText" type="Label" parent="Interface/InterfaceContentAspectRatioContainer/AutosaveIndicator/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_type_variation = &"TextSmall"
+text = "Autosaving..."
+
+[node name="AutosaveIndicatorAnimationPlayer" type="AnimationPlayer" parent="Interface/InterfaceContentAspectRatioContainer/AutosaveIndicator"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_c8omt")
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/InterfaceContentAspectRatioContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="Control" type="Control" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="InterfaceContentContainer" type="MarginContainer" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InterfaceContentMarginContainer" type="MarginContainer" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer/InterfaceContentContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"Margin16"
+
+[node name="DialogTextHeightLabel" type="Label" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer/InterfaceContentContainer/InterfaceContentMarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_type_variation = &"DialogText"
+text = " 
+ 
+ 
+"
+horizontal_alignment = 1
+
+[node name="DialogTextLabel" type="Label" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer/InterfaceContentContainer/InterfaceContentMarginContainer/DialogTextHeightLabel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"DialogText"
+text = "Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters."
+autowrap_mode = 3
+visible_characters_behavior = 1
+script = ExtResource("3_u1jja")
+
+[node name="SkipDialogIndicator" type="Label" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer/InterfaceContentContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_type_variation = &"TextMiddle"
+text = ">"
+horizontal_alignment = 1
+
+[node name="SkipDialogIndicatorAnimationPlayer" type="AnimationPlayer" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer/InterfaceContentContainer/SkipDialogIndicator"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_rsgm5")
+}
+
+[node name="InventoryContent" type="MarginContainer" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer/InterfaceContentContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MapTextureRect" type="TextureRect" parent="Interface/InterfaceContentAspectRatioContainer/VBoxContainer/InterfaceContentContainer/InventoryContent"]
+unique_name_in_owner = true
+texture_filter = 5
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("5_hguqx")
+expand_mode = 3
+
+[node name="Fade" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FadeAnimationPlayer" type="AnimationPlayer" parent="Fade"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_frng2")
+}
+
+[node name="PauseMenu" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.5
+offset_top = -50.5
+offset_right = 94.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Margin16"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="PauseMenu/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back to Game"
+
+[node name="Options" type="Button" parent="PauseMenu/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="ReturnToTitle" type="Button" parent="PauseMenu/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Main Menu"
+
+[node name="LoseProgressConfirmationDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Warning"
+initial_position = 1
+size = Vector2i(457, 106)
+
+[node name="Label" type="Label" parent="LoseProgressConfirmationDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 449.0
+offset_bottom = 57.0
+text = "Unsaved progress will be lost.
+Are you sure you want to return to the main menu?"
+horizontal_alignment = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_sp76a")
+
+[connection signal="confirmed" from="OptionsDialog" to="." method="_on_options_dialog_confirmed"]
+[connection signal="visibility_changed" from="PauseMenu" to="." method="_on_pause_menu_visibility_changed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/MarginContainer/VBoxContainer/ReturnToTitle" to="." method="_on_return_to_title_pressed"]
+[connection signal="confirmed" from="LoseProgressConfirmationDialog" to="." method="_on_lose_progress_confirmation_dialog_confirmed"]
+[connection signal="visibility_changed" from="LoseProgressConfirmationDialog" to="." method="_on_lose_progress_confirmation_dialog_visibility_changed"]

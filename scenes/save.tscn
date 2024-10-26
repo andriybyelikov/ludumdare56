@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx2a28ndn4llt"]
+
+[ext_resource type="Script" path="res://scenes/save.tscn.gd" id="1_88krs"]
+
+[node name="Save" type="Node"]
+script = ExtResource("1_88krs")

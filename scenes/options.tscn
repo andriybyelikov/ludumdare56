@@ -1,0 +1,191 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjwfnq8kp5aqg"]
+
+[ext_resource type="Script" path="res://scenes/options.tscn.gd" id="2_2vhme"]
+
+[node name="Main" type="ConfirmationDialog"]
+title = "Options"
+initial_position = 1
+size = Vector2i(480, 320)
+visible = true
+unresizable = true
+script = ExtResource("2_2vhme")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 472.0
+offset_bottom = 271.0
+current_tab = 0
+
+[node name="Interface" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("ContentContainer/ContentLayout/InterfaceLanguageOptionButton")
+metadata/_tab_index = 0
+
+[node name="ContentContainer" type="MarginContainer" parent="TabContainer/Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Margin16"
+
+[node name="ContentLayout" type="GridContainer" parent="TabContainer/Interface/ContentContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 64
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="LanguageLabel" type="Label" parent="TabContainer/Interface/ContentContainer/ContentLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Language"
+horizontal_alignment = 1
+
+[node name="InterfaceLanguageOptionButton" type="OptionButton" parent="TabContainer/Interface/ContentContainer/ContentLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+selected = 0
+item_count = 1
+popup/item_0/text = "English"
+
+[node name="TextSpeedLabel" type="Label" parent="TabContainer/Interface/ContentContainer/ContentLayout"]
+layout_mode = 2
+text = "Text Speed"
+horizontal_alignment = 1
+
+[node name="TextSpeedSpinBox" type="SpinBox" parent="TabContainer/Interface/ContentContainer/ContentLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+min_value = 1.0
+max_value = 5.0
+value = 3.0
+alignment = 1
+
+[node name="ScaleLabel" type="Label" parent="TabContainer/Interface/ContentContainer/ContentLayout"]
+layout_mode = 2
+tooltip_text = "Sets the scale of the interface.
+Set to 0 to automatically determine the optimal scale."
+mouse_filter = 1
+text = "Scale"
+horizontal_alignment = 1
+
+[node name="ScaleSpinBox" type="SpinBox" parent="TabContainer/Interface/ContentContainer/ContentLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 4.0
+alignment = 1
+
+[node name="Video" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+focus_neighbor_bottom = NodePath("ContentContainer/ContentLayout/FullScreenModeCheckBox")
+metadata/_tab_index = 1
+
+[node name="ContentContainer" type="MarginContainer" parent="TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Margin16"
+
+[node name="ContentLayout" type="GridContainer" parent="TabContainer/Video/ContentContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 64
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="FullScreenModeLabel" type="Label" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Full Screen Mode"
+horizontal_alignment = 1
+
+[node name="FullScreenModeCheckBox" type="CheckBox" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="AspectRatioLabel" type="Label" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+layout_mode = 2
+text = "Aspect Ratio"
+horizontal_alignment = 1
+
+[node name="AspectRatioOptionButton" type="OptionButton" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ResolutionLabel" type="Label" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+layout_mode = 2
+text = "Resolution"
+horizontal_alignment = 1
+
+[node name="ResolutionOptionButton" type="OptionButton" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="VSyncLabel" type="Label" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+layout_mode = 2
+text = "VSync"
+horizontal_alignment = 1
+
+[node name="VSyncCheckBox" type="CheckBox" parent="TabContainer/Video/ContentContainer/ContentLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+
+[node name="Audio" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+focus_neighbor_bottom = NodePath("ContentContainer/GridContainer/AudioLanguageOptionButton")
+metadata/_tab_index = 2
+
+[node name="ContentContainer" type="MarginContainer" parent="TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Margin16"
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Audio/ContentContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 64
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="LanguageLabel" type="Label" parent="TabContainer/Audio/ContentContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Language"
+horizontal_alignment = 1
+
+[node name="AudioLanguageOptionButton" type="OptionButton" parent="TabContainer/Audio/ContentContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+alignment = 1
+selected = 0
+item_count = 1
+popup/item_0/text = "English"
+
+[connection signal="canceled" from="." to="." method="_on_canceled"]
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
+[connection signal="value_changed" from="TabContainer/Interface/ContentContainer/ContentLayout/ScaleSpinBox" to="TabContainer/Interface/ContentContainer/ContentLayout/ScaleSpinBox" method="_on_value_changed"]
+[connection signal="toggled" from="TabContainer/Video/ContentContainer/ContentLayout/FullScreenModeCheckBox" to="." method="_on_full_screen_mode_check_box_toggled"]
+[connection signal="item_selected" from="TabContainer/Video/ContentContainer/ContentLayout/AspectRatioOptionButton" to="." method="_on_aspect_ratio_option_button_item_selected"]
